@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>添加商品</h2>
+<form id="ff" method="post">
+    <div>
+        <label for="title">Name:</label>
+        <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+    </div>
+
+    <div>
+        <label for="email">Email:</label>
+        <input class="easyui-validatebox" type="text" name="email" data-options="validType:'email'" />
+    </div>
+    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="save()">提交</a><br>
+
+</form>
+
+
+<script>
+    function save(){
+        /*第一步*/
+        $('#ff').form({
+            url:'/item/add',
+            onSubmit: function(){
+                // do some check
+                // return false to prevent submit;
+                return true;
+            },
+            /*回调*/
+            success:function(data){
+                alert(data)
+            }
+        });
+        /*第二步*/
+        // submit the form
+        $('#ff').submit();
+    }
+
+</script>
+</body>
+</html>

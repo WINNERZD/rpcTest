@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:fit="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="js/jquery-easyui-1.5/themes/default/easyui.css">
+    <link rel="stylesheet" href="js/jquery-easyui-1.5/themes/icon.css">
+</head>
+<body class="easyui-layout">
+    <div data-options="region:'north',title:'North Title',split:true" style="height:100px;"></div>
+    <div data-options="region:'south',title:'South Title',split:false" style="height:50px;text-align: center">actor: winner</div>
+    <div data-options="region:'east',iconCls:'icon-reload',title:'East',split:true" style="width:100px;"></div>
+    <div data-options="region:'west',title:'West',split:true" style="width:250px;">
+        <div id="aa" class="easyui-accordion" style="width:250px;height:200px;" fit:true>
+            <div title="商品管理" data-options="iconCls:'icon-reload',selected:true" style="overflow:auto;padding:10px;">
+                <ul id="tt0" class="easyui-tree my">
+
+                                    <li data-options="attributes:{'url':'list'}">
+                                        <span>商品列表</span>
+                                    </li>
+                                    <li data-options="attributes:{'url':'add'}">
+                                        <span>添加商品</span>
+                                    </li>
+                                    <li data-options="attributes:{'url':'delete'}">
+                                        <span>商品下架</span>
+                                    </li>
+                </ul>
+            </div>
+            <div title="用户管理" data-options="iconCls:'icon-reload'" style="padding:10px;">
+                <ul id="tt1" class="easyui-tree my">
+                    <li>
+                        <span>商品列表</span>
+                    </li>
+                    <li>
+                        <span>添加商品</span>
+                    </li>
+                    <li>
+                        <span>商品下架</span>
+                    </li>
+                </ul>
+            </div>
+            <div title="后台维护"data-options="iconCls:'icon-reload',selected:true" style="padding:10px;">
+                <ul id="tt2" class="easyui-tree my">
+
+                    <li>
+                        <span>商品列表</span>
+                    </li>
+                    <li>
+                        <span>添加商品</span>
+                    </li>
+                    <li>
+                        <span>商品下架</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div data-options="region:'center'" style="padding:5px;background:#eee;">
+        <div id="tab" class="easyui-tabs" data-options="fit:true">
+            <div title="欢迎页" style="padding:20px;display:none;">
+                <h3>欢迎来到西安是科技六路雁塔区立人科技</h3></div>
+        </div>
+
+
+    </div>
+
+<script type="text/javascript" src="js/jquery-easyui-1.5/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-easyui-1.5/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/jquery-easyui-1.5/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/jquery-easyui-1.5/moment.min.js"></script>
+<script type="text/javascript" src="js/jquery-easyui-1.5/moment-with-locales.js"></script>
+<script type="text/javascript">
+    $('.my').tree({
+        onClick: function(node){
+            var tab=$("#tab").tabs('getTab',node.text);
+            if(tab){
+                /*判断是否存在，防止出现重复面板，如果已经存在select选择它*/
+                $("#tab").tabs('select',node.text);
+            }else {
+                /*不存在就加一个*/
+                $("#tab").tabs('add',{
+                    title:node.text,
+                    closable:true,
+                    href: node.attributes.url
+                });
+            }
+        }
+    });
+
+
+
+</script>
+</body>
+</html>

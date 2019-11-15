@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<h2>我是大白</h2>
+<tr><th>id号</th></tr>
+<tr th:each="tbitem:${tbItems}">
+    <td th:text="${tbitem.id}"></td>
+</tr>
+</body>
+</html>

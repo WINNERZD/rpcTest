@@ -1,0 +1,77 @@
+<table id="dg" class="easyui-datagrid" data-options="url:'/item/list',fitColumns:true,toolbar:'#tb',pagination:true,singleSelect:false,fit:true">
+    <thead>
+    <tr>
+        <th data-options="field:'ch',checkbox:true,width:100"></th>
+        <th data-options="field:'id',width:50,align:'center'">编码</th>
+        <th data-options="field:'title',width:200">名称</th>
+        <th data-options="field:'sellPoint',width:200">销售地点</th>
+        <th data-options="field:'num',width:50,align:'center'">销量</th>
+        <th data-options="field:'status',width:50,align:'center',formatter:fmtstatus">状态</th>
+        <th data-options="field:'created',width:100,align:'center',formatter:fmtdata">创建时间</th>
+        <th data-options="field:'updated',width:100,align:'center',formatter:fmtdata">更新时间</th>
+        <th data-options="field:'price',width:50,align:'center',formatter:fmtprice">价格（￥）</th>
+    </tr>
+    </thead>
+</table>
+<div id="tb">
+    <input  type="text" id="qid" placeholder="id查询..."/>
+    <input  type="text" id="qtitle" placeholder="名称查询..."/>
+    <input  type="text" id="qprice" placeholder="价钱查询..."/>
+    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="find()">查询</a><br>
+    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="add()">新增</a>
+    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" onclick="edit()">修改</a>
+    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" onclick="Delete()">删除</a>
+
+</div>
+<script>
+    function add() {
+        $(".tree-title:contains('添加商品')").parent().click();
+    }
+    /*修改*/
+    function edit() {
+
+        
+    }
+    /*查询*/
+    function find() {
+        $("#dg").datagrid('load',{
+            /*给load方法添加查询方法*/
+            title:$("#qtitle").val(),
+            price:$("#qprice").val(),
+            id:$("#qid").val()
+        });
+        
+    }
+    /*删除*/
+    function Delete(v,r,i){
+        $.messager.confirm('确认','您确定想要删除记录？',function(){
+            if(r){
+                var select=$("#dg").datagrid('getSelections');
+                if(select.length>0){
+                    for (var i=0;i<select.length;i++){
+                        $("#dg").datagrid("deleteRow",i);
+                    }
+                }
+            }
+        });
+
+        
+    }
+    function fmtprice(v,r,i) {
+        return v/100;
+    }
+    function fmtdata(v,r,i) {
+
+      return  moment(v).format("YYYY-MM-DD");
+    }
+    function fmtstatus(v,r,i) {
+        if(v==1){
+            return "正常";
+        }else if(v==2){
+            return "下架";
+        }else {
+            return "删除";
+        }
+        
+    }
+</script>
